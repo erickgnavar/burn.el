@@ -1,9 +1,9 @@
 ;;; burn.el --- Burn your code by replacing it with 🔥
 
 ;; Copyright © 2020 Erick Navarro
-;; Author: Erick Navarro <erick@navarro.io>
+;; Authors: Erick Navarro <erick@navarro.io>, Andros Fenollosa <andros@fenollosa.email>
 ;; URL: https://github.com/erickgnavar/burn.el
-;; Version: 0.1.0
+;; Version: 0.2.0
 ;; SPDX-License-Identifier: GNU General Public License v3.0 or later
 
 ;;; Commentary:
@@ -11,24 +11,33 @@
 
 ;;; Code:
 
-(defun burn--replace-at-point ()
-  "Replace the character at point with 🔥."
-  (delete-char 1)
-  (insert "🔥"))
+(setf burn--emoji "🔥")
 
-(defun burn--replace-line ()
-  "Burn code in the current line."
-  (while (< (point) (line-end-position))
-    (sit-for 0.05)
-    (burn--replace-at-point)))
+(defun burn--is-exist-emoji ()
+    (goto-char 1)
+    (search-forward burn--emoji)
+    (equal (point) 1))
+
+(defun burn--replace-backward-at-point ()
+  "Replace the backwards character at point with burn--emoji."
+  (re-search-backward (concat "[^" burn--emoji "]") 1)
+  (delete-char 1)
+  (insert burn--emoji))
+
+(defun burn--replace-forward-at-point ()
+  "Replace the forward character at point with burn--emoji."
+  (re-search-forward (concat "[^" burn--emoji "]") 1)
+  (delete-char 1)
+  (insert burn--emoji))
 
 (defun burn-code ()
-  "Replace code with 🔥 emoji."
+  "Replace code with burn--emoji."
   (interactive)
-  (while (< (line-number-at-pos) (line-number-at-pos (point-max)))
-    (progn
-      (beginning-of-line)
-      (burn--replace-line)
-      (forward-line))))
+  (while burn--is-exist-emoji
+    (sit-for 1.05)
+    (burn--replace-backward-at-point)
+    (burn--replace-forward-at-point)
+    ))
 
 ;;; burn.el ends here
+
