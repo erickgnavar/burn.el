@@ -14,30 +14,32 @@
 (setf burn--emoji "🔥")
 
 (defun burn--is-exist-emoji ()
-    (goto-char 1)
-    (search-forward burn--emoji)
-    (equal (point) 1))
+  (not (null (string-match-p burn--emoji (buffer-string)))))
+
+(defun burn--is-empty ()
+  (= 0 (length (replace-regexp-in-string (concat "\\`[ \t\n" burn--emoji "]*") "" (replace-regexp-in-string (concat "[ \t\n" burn--emoji "]*\\'") "" (buffer-string))))))
 
 (defun burn--replace-backward-at-point ()
   "Replace the backwards character at point with burn--emoji."
-  (re-search-backward (concat "[^" burn--emoji "]") 1)
+  (re-search-backward (concat "[^" burn--emoji " \t\n]") 1)
   (delete-char 1)
   (insert burn--emoji))
 
 (defun burn--replace-forward-at-point ()
   "Replace the forward character at point with burn--emoji."
-  (re-search-forward (concat "[^" burn--emoji "]") 1)
+  (re-search-forward (concat "[^" burn--emoji " \t\n]") 1)
   (delete-char 1)
   (insert burn--emoji))
 
 (defun burn-code ()
   "Replace code with burn--emoji."
   (interactive)
-  (while burn--is-exist-emoji
-    (sit-for 1.05)
+  (while (not (burn--is-empty))
+    (sit-for 0.5)
     (burn--replace-backward-at-point)
     (burn--replace-forward-at-point)
-    ))
+    )
+  )
 
 ;;; burn.el ends here
 
