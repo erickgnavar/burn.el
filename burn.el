@@ -32,13 +32,13 @@
 (defun burn-code ()
   "Replace code with burn--emoji."
   (interactive)
+  ;; Burn
   (while (not (burn--is-empty))
     (sit-for burn--interval)
     (burn--replace-backward-at-point)
     (burn--replace-forward-at-point)
     )
-  ;; Clear burn--emoji
-  (set-buffer-modified-p ""))
+  (erase-buffer))
 
 ;;; burn.el ends here
 
