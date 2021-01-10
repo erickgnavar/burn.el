@@ -12,6 +12,7 @@
 ;;; Code:
 
 (setf burn--emoji "🔥")
+(setf burn--interval 0.001)
 
 (defun burn--is-empty ()
   (= 0 (length
@@ -32,7 +33,7 @@
   "Replace code with burn--emoji."
   (interactive)
   (while (not (burn--is-empty))
-    (sit-for 0.5)
+    (sit-for burn--interval)
     (burn--replace-backward-at-point)
     (burn--replace-forward-at-point)
     )
