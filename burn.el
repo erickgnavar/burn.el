@@ -1,3 +1,4 @@
+-*- lexical-binding: t; -*-
 ;;; burn.el --- Burn your code by replacing it with 🔥
 
 ;; Copyright © 2020 Erick Navarro
@@ -11,10 +12,11 @@
 
 ;;; Code:
 
-(setf burn--emoji "🔥")
-(setf burn--interval 0.001)
+(defvar burn--emoji "🔥")
+(defvar burn--interval 0.001)
 
 (defun burn--is-empty ()
+  "Check if there is nothing left to burn."
   (= 0 (length
         (replace-regexp-in-string (concat "\\`[ \t\n" burn--emoji "]*") ""
                                   (replace-regexp-in-string (concat "[ \t\n" burn--emoji "]*\\'") "" (buffer-string))))))
@@ -36,8 +38,7 @@
   (while (not (burn--is-empty))
     (sit-for burn--interval)
     (burn--replace-backward-at-point)
-    (burn--replace-forward-at-point)
-    )
+    (burn--replace-forward-at-point))
   (erase-buffer))
 
 ;;; burn.el ends here
