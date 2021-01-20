@@ -1,6 +1,8 @@
 # burn.el
 
-Burn code by replacing all the text with 🔥
+The fire will balance everything. It will kill any line of code, be it good or a bug.
+
+Empty the buffer with a hot 🔥fire🔥 .
 
 ![burn-code](./images/burn-code.gif)
 
