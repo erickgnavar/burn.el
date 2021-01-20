@@ -1,6 +1,5 @@
--*- lexical-binding: t; -*-
 ;;; burn.el --- Burn your code by replacing it with 🔥
-
+;;
 ;; Copyright © 2020 Erick Navarro
 ;; Authors: Erick Navarro <erick@navarro.io>, Andros Fenollosa <andros@fenollosa.email>
 ;; URL: https://github.com/erickgnavar/burn.el
@@ -11,6 +10,7 @@
 ;; Replace the buffer content with 🔥.
 
 ;;; Code:
+(provide 'burn)
 
 (defvar burn--emoji "🔥")
 (defvar burn--interval 0.001)
