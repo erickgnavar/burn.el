@@ -13,7 +13,7 @@ Empty the buffer with a hot 🔥fire🔥 .
 2. Add this to your config
 
 ```elisp
-(add-to-list 'load-path "path-cloned/burn.el")
+(load "path-cloned/burn.el")
 
 (require 'burn)
 ```
