@@ -8,14 +8,12 @@ Empty the buffer with a hot 🔥fire🔥 .
 
 ## Install
 
-### Cloning the repo
+1. Cloning the repo o download `burn.el`.
 
-Clone this repo somewhere
-
-Add this to your config
+2. Add this to your config
 
 ```elisp
-(add-to-list 'load-path "path where the repo was cloned")
+(add-to-list 'load-path "path-cloned/burn.el")
 
 (require 'burn)
 ```
